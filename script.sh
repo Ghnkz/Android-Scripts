@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/HorizonDroidLab/manifest.git -b fifteen --git-lfs; then
+if ! repo init -u https://github.com/SkylineUI-Reborn/platform_manifest.git -b fifteen --git-lfs; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -62,13 +62,13 @@ rm -rf hardware/mediatek
 
 rm -rf device/mediatek/sepolicy_vndr
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b horizon device/xiaomi/gale || { echo "Failed to clone device tree"; }
+git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b sky15 device/xiaomi/gale || { echo "Failed to clone device tree"; }
 
 git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
 
 git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
 
-git clone https://github.com/VannTakashi/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
+git clone https://github.com/LineageOS/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
 
 git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
 
@@ -92,8 +92,8 @@ echo "====== Envsetup Done ======="
 
 # Build ROM
 echo "===================================="
-echo "        Build Horizon.."
+echo "        Build Skyline.."
 echo "===================================="
 . build/envsetup.sh
-lunch horizon_gale-ap4a-userdebug
-m horizon
+lunch aosp_gale-ap4a-userdebug
+mka skyline
