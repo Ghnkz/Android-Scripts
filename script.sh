@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/PixelOS-AOSP/manifest.git -b fifteen --git-lfs; then
+if ! repo init -u repo init -u https://github.com/HorizonDroidLab/manifest.git -b fifteen --git-lfs; then
   echo "Repo initialization failed. Exiting."
   exit 1
 fi
@@ -52,30 +52,31 @@ echo "============="
 echo "=============================================="
 echo "       Cloning Trees..........."
 echo "=============================================="
-git clone https://github.com/tillua467/phoenix-dt -b pos-15 device/xiaomi/phoenix || { echo "Failed to clone device tree"; exit 1; }
+git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b horizon device/xiaomi/gale || { echo "Failed to clone device tree"; exit 1; }
 
-git clone https://github.com/tillua467/sm6150-common -b pos-15 device/xiaomi/sm6150-common || { echo "Failed to clone common device tree"; exit 1; }
+git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone common device tree"; exit 1; }
 
-git clone https://github.com/tillua467/android_kernel_xiaomi_sm6150 kernel/xiaomi/sm6150 || { echo "Failed to clone kernel"; exit 1; }
-
-git clone https://github.com/tillua467/proprietary_vendor_xiaomi_phoenix vendor/xiaomi/phoenix || { echo "Failed to clone vendor phoenix"; exit 1; }
-
-git clone https://github.com/aosp-phoenix/proprietary_vendor_xiaomi_sm6150-common vendor/xiaomi/sm6150-common || { echo "Failed to clone common vendor phoenix"; exit 1; }
+git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel"; exit 1; }
 
 rm -rf hardware/xiaomi
 
-git clone https://github.com/tillua467/android_hardware_xiaomi -b lineage-22.1 hardware/xiaomi || { echo "Failed to clone hardware"; exit 1; }
+rm -rf hardware/mediatek
 
-git clone https://gitlab.com/Shripal17/vendor_xiaomi_miuicamera vendor/xiaomi/miuicamera || { echo "Failed to clone MIUI Camera"; exit 1; }
+rm -rf device/mediatek/sepolicy_vndr
+
+git clone https://github.com/VannTakashi/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone vendor phoenix"; exit 1; }
+
+git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone common vendor phoenix"; exit 1; }
+
+git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to clone hardware"; exit 1; }
 
 /opt/crave/resync.sh
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=tillua467
+export BUILD_USERNAME=takashiiprjkt
 export BUILD_HOSTNAME=crave
-export TARGET_DISABLE_EPPE=true
-export TZ=Asia/Dhaka
+export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
 echo "======= Export Done ======"
 
@@ -90,5 +91,5 @@ echo "===================================="
 echo "        Build POS.."
 echo "===================================="
 . build/envsetup.sh
-lunch aosp_phoenix-ap4a-userdebug
-mka bacon
+lunch horizon_gale-ap4a-userdebug
+m horizon
