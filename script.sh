@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u repo init -u https://github.com/HorizonDroidLab/manifest.git -b fifteen --git-lfs; then
+if ! repo init -u https://github.com/HorizonDroidLab/manifest.git -b fifteen --git-lfs; then
   echo "Repo initialization failed. Exiting."
   exit 1
 fi
@@ -88,7 +88,7 @@ echo "====== Envsetup Done ======="
 
 # Build ROM
 echo "===================================="
-echo "        Build POS.."
+echo "        Build Horizon.."
 echo "===================================="
 . build/envsetup.sh
 lunch horizon_gale-ap4a-userdebug
