@@ -33,16 +33,14 @@ echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
 if ! repo init -u https://github.com/HorizonDroidLab/manifest.git -b fifteen --git-lfs; then
-  echo "Repo initialization failed. Exiting."
-  exit 1
+  echo "Repo initialization failed."
 fi
 echo "=============================================="
 echo "       Manifest Cloned successfully"
 echo "=============================================="
 # Sync
 if ! /opt/crave/resync.sh || ! repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j$(nproc --all); then
-  echo "Repo sync failed. Exiting."
-  exit 1
+  echo "Repo sync failed."
 fi
 echo "============="
 echo " Sync success"
@@ -52,11 +50,11 @@ echo "============="
 echo "=============================================="
 echo "       Cloning Trees..........."
 echo "=============================================="
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b horizon device/xiaomi/gale || { echo "Failed to clone device tree"; exit 1; }
+rm -rf device/xiaomi
 
-git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone common device tree"; exit 1; }
+rm -rf vendor/xiaomi
 
-git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel"; exit 1; }
+rm -rf kernel/xiaomi
 
 rm -rf hardware/xiaomi
 
@@ -64,11 +62,17 @@ rm -rf hardware/mediatek
 
 rm -rf device/mediatek/sepolicy_vndr
 
-git clone https://github.com/VannTakashi/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone vendor phoenix"; exit 1; }
+git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b horizon device/xiaomi/gale || { echo "Failed to clone device tree"; }
 
-git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone common vendor phoenix"; exit 1; }
+git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
 
-git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to clone hardware"; exit 1; }
+git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
+
+git clone https://github.com/VannTakashi/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
+
+git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
+
+git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to sepolicy_vndr"; }
 
 /opt/crave/resync.sh
 
