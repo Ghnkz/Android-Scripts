@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/SkylineUI-Reborn/platform_manifest.git -b fifteen --git-lfs; then
+if ! repo init -u https://github.com/ProjectMatrixx/android.git -b 15.0 --git-lfs; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -62,7 +62,7 @@ rm -rf hardware/mediatek
 
 rm -rf device/mediatek/sepolicy_vndr
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b sky15 device/xiaomi/gale || { echo "Failed to clone device tree"; }
+git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b cartesian device/xiaomi/gale || { echo "Failed to clone device tree"; }
 
 git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
 
@@ -92,8 +92,7 @@ echo "====== Envsetup Done ======="
 
 # Build ROM
 echo "===================================="
-echo "        Build Skyline.."
+echo "  BRINGING TO HORIZON , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-lunch aosp_gale-ap4a-userdebug
-mka skyline
+brunch gale
