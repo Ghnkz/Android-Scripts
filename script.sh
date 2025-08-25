@@ -76,6 +76,10 @@ git revert a217da7a6d8ced1cd9c96804b534ebc1ecc34c36 --no-edit
 
 repo sync -j5 --fail-fast
 
+rm -rf package/modules/Permission
+
+git clone https://github.com/AfterlifeOS/packages_modules_Permission -b 13 package/modules/Permission
+
 # Export Environment Variables
 echo "======= Exporting........ ======"
 export BUILD_USERNAME=VannNieauverrau.
