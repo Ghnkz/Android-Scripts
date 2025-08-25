@@ -74,6 +74,8 @@ git revert a217da7a6d8ced1cd9c96804b534ebc1ecc34c36 --no-edit
 
 /opt/crave/resync.sh
 
+repo sync -j5 --fail-fast
+
 # Export Environment Variables
 echo "======= Exporting........ ======"
 export BUILD_USERNAME=VannNieauverrau.
