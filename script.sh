@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/ProjectMatrixx/android.git -b 15.0 --git-lfs; then
+if ! repo init --depth=1 --no-repo-verify -u https://github.com/VannTakashi/android_manifest.git -b LTS -g default,-mips,-darwin,-notdefault; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -62,24 +62,22 @@ rm -rf hardware/mediatek
 
 rm -rf device/mediatek/sepolicy_vndr
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b cartesian device/xiaomi/gale || { echo "Failed to clone device tree"; }
+git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b afterlife-T device/xiaomi/gale || { echo "Failed to clone device tree"; }
 
-git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
+git clone https://github.com/VannTakashi/vann_keys -b afl vendor/afterlife-priv/keys
 
-git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
+. build/envsetup.sh
 
-git clone https://github.com/LineageOS/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
+cd kernel/xiaomi/gale
 
-git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
-
-git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to sepolicy_vndr"; }
+git revert a217da7a6d8ced1cd9c96804b534ebc1ecc34c36 --no-edit
 
 /opt/crave/resync.sh
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=takashiiprjkt
-export BUILD_HOSTNAME=crave
+export BUILD_USERNAME=VannNieauverrau.
+export BUILD_HOSTNAME=vann
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
 echo "======= Export Done ======"
@@ -92,7 +90,8 @@ echo "====== Envsetup Done ======="
 
 # Build ROM
 echo "===================================="
-echo "  BRINGING TO HORIZON , STARTING BUILD.."
+echo "  LETS AFTERIFY ! , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-brunch gale
+lunch afterlife_gale-userdebug
+m afterlife -j$(nproc --all)
