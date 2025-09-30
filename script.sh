@@ -1,5 +1,5 @@
 #!/bin/bash
-# crave run --no-patch -- "curl https://raw.githubusercontent.com/tillua467/Android-Scripts/refs/heads/main/script.sh | bash"
+# crave run --no-patch -- "curl https://raw.githubusercontent.com/Ghnkz/Android-Scripts/refs/heads/main/script.sh | bash"
 
 # Remove Unnecessary Files
 echo "===================================="
