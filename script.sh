@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/ProjectMatrixx/android.git -b 15.0 --git-lfs; then
+if ! repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -58,27 +58,27 @@ rm -rf kernel/xiaomi
 
 rm -rf hardware/xiaomi
 
-rm -rf hardware/mediatek
+git clone https://github.com/xiaomi-sm6150/android_device_xiaomi_sweet -b lineage-20 device/xiaomi/sweet || { echo "Failed to clone device tree"; }
 
-rm -rf device/mediatek/sepolicy_vndr
+git clone https://github.com/xiaomi-sm6150/proprietary_vendor_xiaomi_sweet -b lineage-20 vendor/xiaomi/sweet || { echo "Failed to clone vendor tree"; }
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b cartesian device/xiaomi/gale || { echo "Failed to clone device tree"; }
+git clone https://github.com/xiaomi-sm6150/android_kernel_xiaomi_sm6150 -b lineage-23.0 kernel/xiaomi/sm6150 || { echo "Failed to clone kernel tree"; }
 
-git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
+git clone https://github.com/LineageOS/android_hardware_xiaomi -b lineage-20 hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
 
-git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
+git clone https://github.com/xiaomi-sm6150/android_device_xiaomi_sm6150-common -b lineage-20 device/xiaomi/sm6150-common || { echo "Failed to clone device common"; }
 
-git clone https://github.com/LineageOS/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
+git clone https://github.com/xiaomi-sm6150/proprietary_vendor_xiaomi_sm6150-common -b lineage-20 vendor/xiaomi/sm6150-common || { echo "Failed to clone vendor common"; }
 
-git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
+git clone https://github.com/xiaomi-sm6150/proprietary_vendor_xiaomi_miuicamera-sweet vendor/xiaomi/miuicamera-sweet || { echo "Failed to clone vendor/miuicamera"; }
 
-git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to sepolicy_vndr"; }
+git clone https://github.com/xiaomi-sm6150/android_device_xiaomi_miuicamera-sweet device/xiaomi/miuicamera-sweet || { echo "Failed to clone device/miuicamera"; }
 
 /opt/crave/resync.sh
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=takashiiprjkt
+export BUILD_USERNAME=Mad`s-prjkt
 export BUILD_HOSTNAME=crave
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
@@ -95,4 +95,4 @@ echo "===================================="
 echo "  BRINGING TO HORIZON , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-brunch gale
+brunch sweet
