@@ -78,7 +78,7 @@ git clone https://github.com/xiaomi-sm6150/android_device_xiaomi_miuicamera-swee
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=Mad`s-prjkt
+export BUILD_USERNAME=Madsprjkt
 export BUILD_HOSTNAME=crave
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
