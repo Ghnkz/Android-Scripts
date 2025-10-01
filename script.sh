@@ -58,6 +58,12 @@ rm -rf kernel/xiaomi
 
 rm -rf hardware/xiaomi
 
+sudo ln -s /usr/lib/x86_64-linux-gnu/libncursesw.so.6 /usr/lib/x86_64-linux-gnu/libncursesw.so.5
+
+sudo ln -s /usr/lib/x86_64-linux-gnu/libncurses.so.6 /usr/lib/x86_64-linux-gnu/libncurses.so.5
+
+sudo ln -s /usr/lib/x86_64-linux-gnu/libtinfo.so.6 /usr/lib/x86_64-linux-gnu/libtinfo.so.5
+
 git clone https://github.com/xiaomi-sm6150/android_device_xiaomi_sweet -b lineage-20 device/xiaomi/sweet || { echo "Failed to clone device tree"; }
 
 git clone https://github.com/xiaomi-sm6150/proprietary_vendor_xiaomi_sweet -b lineage-20 vendor/xiaomi/sweet || { echo "Failed to clone vendor tree"; }
