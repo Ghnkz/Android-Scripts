@@ -83,8 +83,6 @@ git clone https://github.com/AbuRider/android_hardware_xiaomi.git -b lineage-23.
 
 git clone https://github.com/LineageOS/android_hardware_mediatek.git -b lineage-23.1 hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
 
-/opt/crave/resync.sh
-
 # Export Environment Variables
 echo "======= Exporting........ ======"
 export BUILD_USERNAME=xaveroprjkt.
