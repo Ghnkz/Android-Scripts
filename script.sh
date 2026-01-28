@@ -46,6 +46,17 @@ echo "============="
 echo " Sync success"
 echo "============="
 
+# Setting Up BPF Hacks!
+echo "Dropping Original Connectivity and system_bpf"
+rm -rf system/bpf
+rm -rf packages/modules/Connectivity
+echo "Done!"
+
+# Reclone With Our connectivity and bpf"
+git clone https://github.com/vannkyle/android_packages_modules_Connectivity.git packages/modules/Connectivity
+git clone https://github.com/vannkyle/android_system_bpf.git system/bpf
+echo " All Is Done! Ur Sources Its fully implemented with bpf hacks"
+
 # Clone device trees and other dependencies
 echo "=============================================="
 echo "       Cloning Trees..........."
