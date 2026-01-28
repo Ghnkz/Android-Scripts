@@ -32,7 +32,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/ProjectMatrixx/android.git -b 15.0 --git-lfs; then
+if ! repo init -u https://github.com/Mnzz-Prjkt/android_manifest.git -b sixteen-qpr1 --git-lfs; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -62,24 +62,22 @@ rm -rf hardware/mediatek
 
 rm -rf device/mediatek/sepolicy_vndr
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b cartesian device/xiaomi/gale || { echo "Failed to clone device tree"; }
+git clone https://github.com/xaveroprjkt/device_xiaomi_gale.git -b pos-16.1 device/xiaomi/gale || { echo "Failed to clone device tree"; }
 
-git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
+git clone https://github.com/Mayuri-Chan/proprietary_vendor_xiaomi_gale.git -b sixteen vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
 
-git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
+git clone https://github.com/Mayuri-Chan/android_kernel_xiaomi_gale.git -b cip kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
 
-git clone https://github.com/LineageOS/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
+git clone https://github.com/AbuRider/android_hardware_xiaomi.git -b lineage-23.1 hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
 
-git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
-
-git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to sepolicy_vndr"; }
+git clone https://github.com/LineageOS/android_hardware_mediatek.git -b lineage-23.1 hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
 
 /opt/crave/resync.sh
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=takashiiprjkt
-export BUILD_HOSTNAME=crave
+export BUILD_USERNAME=xaveroprjkt.
+export BUILD_HOSTNAME=serenityco5p
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
 echo "======= Export Done ======"
@@ -95,4 +93,5 @@ echo "===================================="
 echo "  BRINGING TO HORIZON , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-brunch gale
+breakfast gale
+m pixelos
