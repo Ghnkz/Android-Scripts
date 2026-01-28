@@ -77,7 +77,7 @@ git clone https://github.com/LineageOS/android_hardware_mediatek.git -b lineage-
 # Export Environment Variables
 echo "======= Exporting........ ======"
 export BUILD_USERNAME=xaveroprjkt.
-export BUILD_HOSTNAME=serenityco5p
+export BUILD_HOSTNAME=serenitycorp
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
 echo "======= Export Done ======"
