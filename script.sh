@@ -12,7 +12,6 @@ dirs_to_remove=(
   "device/xiaomi"
   "device/xiaomi/sm6150-common"
   "vendor/xiaomi/sm6150-common"
-  "hardware/xiaomi"
   "out/target/product/*/*zip"
   "out/target/product/*/*txt"
   "out/target/product/*/boot.img"
@@ -32,7 +31,7 @@ echo "===================================="
 echo "=============================================="
 echo "         Cloning Manifest..........."
 echo "=============================================="
-if ! repo init -u https://github.com/ProjectMatrixx/android.git -b 15.0 --git-lfs; then
+if ! repo init -u https://github.com/LineageOS-T/android.git -b lineage-20.0 --git-lfs --depth=1; then
   echo "Repo initialization failed."
 fi
 echo "=============================================="
@@ -56,29 +55,19 @@ rm -rf vendor/xiaomi
 
 rm -rf kernel/xiaomi
 
-rm -rf hardware/xiaomi
+git clone https://https://github.com/Ghnkz/device_sweet.git -b 13 device/xiaomi/sweet || { echo "Failed to clone device tree"; }
 
-rm -rf hardware/mediatek
+git clone https://github.com/Ghnkz/vendor_sweet.git -b 13 vendor/xiaomi/sweet || { echo "Failed to clone vendor tree"; }
 
-rm -rf device/mediatek/sepolicy_vndr
+git clone https://github.com/Ghnkz/kernel_xiaomi_sm6150.git kernel/xiaomi/sm6150 || { echo "Failed to clone kernel tree"; }
 
-git clone https://github.com/VannTakashi/device_xiaomi_gale.git -b cartesian device/xiaomi/gale || { echo "Failed to clone device tree"; }
-
-git clone https://github.com/VannTakashi/vendor_xiaomi_gale.git -b lineage-22.1 vendor/xiaomi/gale || { echo "Failed to clone vendor tree"; }
-
-git clone https://github.com/VannTakashi/kernel_xiaomi_gale.git kernel/xiaomi/gale || { echo "Failed to clone kernel tree"; }
-
-git clone https://github.com/LineageOS/android_hardware_xiaomi.git hardware/xiaomi || { echo "Failed to clone xiaomi stuffs"; }
-
-git clone https://github.com/LineageOS/android_hardware_mediatek.git hardware/mediatek || { echo "Failed to clone mediatek hardwares"; }
-
-git clone https://github.com/LineageOS/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr || { echo "Failed to sepolicy_vndr"; }
+git clone https://github.com/Ghnkz/vendor_xiaomi_sweet-miuicamera.git venodr/xiaomi/sweet-miuicamera || { echo "Failed to clone MiuiCamera"; }
 
 /opt/crave/resync.sh
 
 # Export Environment Variables
 echo "======= Exporting........ ======"
-export BUILD_USERNAME=takashiiprjkt
+export BUILD_USERNAME=Rhmd
 export BUILD_HOSTNAME=crave
 export TZ=Asia/Jakarta
 export ALLOW_MISSING_DEPENDENCIES=true
@@ -95,4 +84,5 @@ echo "===================================="
 echo "  BRINGING TO HORIZON , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-brunch gale
+lunch lineage_sweet-user
+m bacon
