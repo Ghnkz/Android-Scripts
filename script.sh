@@ -10,6 +10,7 @@ dirs_to_remove=(
   "vendor/xiaomi"
   "kernel/xiaomi"
   "device/xiaomi"
+  "hardware/xiaomi"
   "device/xiaomi/sm6150-common"
   "vendor/xiaomi/sm6150-common"
   "out/target/product/*/*zip"
@@ -55,11 +56,15 @@ rm -rf vendor/xiaomi
 
 rm -rf kernel/xiaomi
 
+rm -rf hardware/xiaomi
+
 git clone https://https://github.com/Ghnkz/device_sweet.git -b 13 device/xiaomi/sweet || { echo "Failed to clone device tree"; }
 
 git clone https://github.com/Ghnkz/vendor_sweet.git -b 13 vendor/xiaomi/sweet || { echo "Failed to clone vendor tree"; }
 
 git clone https://github.com/Ghnkz/kernel_xiaomi_sm6150.git kernel/xiaomi/sm6150 || { echo "Failed to clone kernel tree"; }
+
+git clone -b lineage-20 https://github.com/LineageOS/android_hardware_xiaomi hardware/xiaomi || { echo "Failed to clone hardware xiaomi"; }
 
 git clone https://github.com/Ghnkz/vendor_xiaomi_sweet-miuicamera.git venodr/xiaomi/sweet-miuicamera || { echo "Failed to clone MiuiCamera"; }
 
@@ -84,5 +89,5 @@ echo "===================================="
 echo "  BRINGING TO HORIZON , STARTING BUILD.."
 echo "===================================="
 . build/envsetup.sh
-lunch lineage_sweet-user
+lunch lineage_sweet-userdebug
 m bacon
